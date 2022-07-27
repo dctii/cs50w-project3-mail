@@ -1,0 +1,98 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <!-- Mail icon and the email address for whichever user is logged in -->
+    <h2 class="pb-2 pt-5">
+        <i class="fa fa-envelope pr-2" aria-hidden="true"></i>{{ request.user.email }}
+    </h2>
+
+    <!-- Buttons that take the user to different views of the email site -->
+    <button class="btn btn-outline-dark" id="inbox">Inbox</button>
+    <button class="btn btn-outline-dark" id="compose">Compose</button>
+    <button class="btn btn-outline-dark" id="sent">Sent</button>
+    <button class="btn btn-outline-dark" id="archived">Archived</button>
+    <a class="btn btn-outline-danger" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    <!-- Reveals the list of emails for either the "inbox", "sent", or "archived" mailbox, the "id" has a corresponding Javascript element -->
+    <div id="emails-view">
+    </div>
+
+    <!-- Reveals specific email content when user wants to read an email -->
+    <div id="emails-content">
+        <li class="list-group-item">
+                <div class="row">
+                    <div class="heading col-xl-1 col-lg-2 col-md-2 col-sm-2">From</div>
+                    <div id="emails-view-sender" class="col-sm"></div>  
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="heading col-xl-1  col-lg-2 col-md-2 col-sm-2">To</div>
+                    <div id="emails-view-recipients" class="col-sm"></div> 
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="heading col-xl-1 col-lg-2 col-md-2 col-sm-2">Date</div>
+                    <div id="emails-view-timestamp" class="col-sm"></div>  
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="heading col-xl-1 col-lg-2 col-md-2 col-sm-2">Subject</div>
+                    <div id="emails-view-subject" class="col-sm"></div>  
+                </div>
+            </li>  
+        <div class="card">
+            <textarea id="emails-view-body" class="card-body"></textarea>
+        </div>
+        <!-- Reply button, that takes user to the Compose Email view with the Reply-to-Sender conditions applied -->
+        <button type="submit" id="reply-btn" class="btn btn-dark mt-2">
+            <i class="fa fa-reply pr-1" aria-hidden="true"></i>Reply
+        </button>    
+    </div>
+
+    <!-- The user is taken here when they want to compose a new e-mail or reply to a sent e-mail -->
+    <div id="compose-view">
+        <h3>Compose Email</h3>
+        <hr class="solid">
+        <form id="compose-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">From</span>
+                    </div>
+                    <input disabled class="form-control bg bg-light text-dark" value="{{ request.user.email }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">To</span>
+                    </div>
+                    <input id="compose-recipients" placeholder="name@name.com" class="form-control" type="email">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">Subject</span>
+                    </div>
+                    <input type="text" class="form-control" id="compose-subject" required>
+                </div>
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Message" required></textarea>
+            <!-- Button that submits the data the user has input -->
+            <button type="submit" id="compose-submit" class="btn btn-dark mt-2"/>
+                <i class="fa fa-paper-plane pr-2" aria-hidden="true"></i>Submit
+            </button>
+        </form>
+    </div>
+{% endblock %}
+
+<!-- Include the primary application's JavaScript for mail -->
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

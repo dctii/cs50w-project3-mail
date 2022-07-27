@@ -1,0 +1,11 @@
+email: sally@sally.com
+password: sally123456!
+
+email: john@john.com
+password: john123456!
+
+email:alice@alice.com
+password: alice123456!
+
+email:helen@helen.com
+password: helen123456!

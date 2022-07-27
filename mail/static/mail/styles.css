@@ -1,0 +1,36 @@
+/* Sets the default height of the text area for HTML tags with id="compose-body" */
+textarea, #compose-body {
+    min-height: 400px;
+}
+
+/* Sets padding on HTML tags with id="emails-object" */
+#emails-object {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+}
+
+/* Sets padding on HTML tags with id="email-addresses" */
+#emails-addresses, .heading {
+    font-weight: bold;
+}
+
+/* Highlights unopened email cards in a light neon blue when the user's cursor hovers over it */
+.card:hover{
+    background-color: #DEF9FF
+}
+
+/* For emails with the class attribute "emails-opened", give then a light grey background */
+.emails-opened {
+    background-color: #E7E7E7;
+}
+
+/* Highlights opened email cardsin a blue-grey that have not been opened when the user's cursor hovers over it */
+.emails-opened:hover {
+    background-color: #D7E0E3;
+}
+
+.archive-btn {
+    cursor: pointer;
+    height:1.875rem;
+}
